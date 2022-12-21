@@ -9,8 +9,12 @@ Install js and typescript
 spin plugin install js2wasm
 spin templates install --git https://github.com/fermyon/spin-js-sdk
 
-redis
+Instal tiny go (latest version doesnt work 0.26.0)
+    curl -fsSL https://github.com/tinygo-org/tinygo/releases/download/v0.25.0/tinygo0.25.0.darwin-amd64.tar.gz -o tinygo.tar.gz 
+    tar xvzf tinygo.tar.gz 
+    sudo mv tinygo/bin/tinygo /usr/local/bin/
 
+redis
     redis-server
 
 send component:
