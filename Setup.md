@@ -57,4 +57,4 @@ Translate component:
     /translate/...
     add to spin.toml    allowed_http_hosts = ["https://api.funtranslations.com"]
 
-curl --location --request GET 'localhost:3000/translate'
+curl --location --request GET 'localhost:3000/translate/text to traslate'
