@@ -1,0 +1,55 @@
+name = "bartholomew-template"
+spin_version = "1"
+version = "0.1.0"
+description = "Your new Bartholomew website."
+trigger = { type = "http", base = "/" }
+
+[[component]]
+source = "modules/bartholomew.wasm"
+id = "bartholomew"
+files = [ "content/**/*" , "templates/*", "scripts/*", "config/*"]
+[component.trigger]
+route = "/..."
+
+[[component]]
+source = "modules/spin_static_fs.wasm"
+id = "fileserver"
+files = [ { source = "static/", destination = "/" } ]
+[component.trigger]
+route = "/static/..."
+
+[[component]]
+id = "send"
+source = "send/target/spin-http-js.wasm"
+[component.trigger]
+route = "/send/..."
+[component.build]
+command = "npm run build"
+workdir = "send"
+
+[[component]]
+id = "encrpyt"
+source = "encrpyt/target/wasm32-wasi/release/encrpyt.wasm"
+[component.trigger]
+route = "/encrypt/..."
+[component.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "encrpyt"
+
+[[component]]
+id = "decrypt"
+source = "decrypt/target/wasm32-wasi/release/decrypt.wasm"
+[component.trigger]
+route = "/decrypt/..."
+[component.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "decrypt"
+
+[[component]]
+id = "translate"
+source = "translate/main.wasm"
+[component.trigger]
+route = "/translate/..."
+[component.build]
+command = "tinygo build -wasm-abi=generic -target=wasi -gc=leaking -no-debug -o main.wasm main.go"
+workdir = "translate"
